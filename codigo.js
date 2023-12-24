@@ -1,15 +1,18 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    let circle = document.querySelector('.hex-puntiagudo');
+    let hexagon = document.querySelector('.hex-puntiagudo');
     let keysPressed = new Set();
     let velocidad = 3;
     let moving = false;
 
+    // Funciones que se ejecutan al cargar
     window.addEventListener('load', () => {
-        circle.style.position = 'absolute';
-        circle.style.left = window.innerWidth / 2 + 'px';
-        circle.style.top = window.innerHeight / 2 + 'px';
+        let offsetX = (window.innerWidth - hexagon.offsetWidth) / 2;
+        let offsetY = (window.innerHeight - hexagon.offsetHeight) / 2;
+        hexagon.style.left = `${offsetX}px`;
+        hexagon.style.top = `${offsetY}px`;
     });
 
+    // Funciones para el movimiento 
     function startMoving() {
         moving = true;
         requestAnimationFrame(move);
@@ -24,7 +27,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
 
-        const style = window.getComputedStyle(circle);
+        const style = window.getComputedStyle(hexagon);
         let left = parseInt(style.left);
         let top = parseInt(style.top);
 
@@ -42,20 +45,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
             left += velocidad;
         }
 
-        circle.style.left = `${left}px`;
-        circle.style.top = `${top}px`;
+        hexagon.style.left = `${left}px`;
+        hexagon.style.top = `${top}px`;
 
         requestAnimationFrame(move);
     }
 
+    // Funciones para hacer zoom-in y zoom-out
+    var btnZoomIn = document.querySelector("#Zoom-in");
+    var btnZoomOut = document.querySelector("#Zoom-out");
+    var scale = 1;
 
+    btnZoomIn.addEventListener("click", (e) => {
+        scale += 0.5;
+        hexagon.style.transform = `scale(${scale})`;
+    });
+
+    btnZoomOut.addEventListener("click", (e) => {
+        scale -= 0.5;
+        hexagon.style.transform = `scale(${scale})`;
+    });
+
+    // Eventos de tecla presionada y tecla soltada
     window.addEventListener('keydown', (e) => {
         keysPressed.add(e.key);
         if (!moving) {
             startMoving();
         }
     });
-
 
     window.addEventListener('keyup', (event) => {
         keysPressed.delete(event.key);

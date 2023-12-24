@@ -1,8 +1,14 @@
+html {
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
 .hex-puntiagudo {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;
     background-color: rgb(131, 159, 164);
@@ -14,9 +20,15 @@
     background-color: rgb(119, 207, 220);
 }
 
-.circle{
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    background-color: green;
+aside {
+    display: inline;
+    position: fixed;
+    background-color: rgb(176, 176, 176, 0.5);
+    opacity: 1;
+    z-index: 1;
+
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
 }
