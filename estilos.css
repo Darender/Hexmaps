@@ -7,19 +7,6 @@ html {
     background: transparent;
 }
 
-.hex-puntiagudo {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: rgb(131, 159, 164);
-    -webkit-clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-}
-
-.hex-puntiagudo:hover {
-    background-color: rgb(119, 207, 220);
-}
-
 aside {
     display: inline;
     position: fixed;
@@ -31,4 +18,35 @@ aside {
     right: 0;
     width: 20%;
     height: 100%;
+}
+
+.hex-puntiagudo2 {
+    height: 2.887em;
+    position: absolute;
+    width: 5em;
+    background-color: rgb(131, 159, 164);
+}
+
+.hex-puntiagudo2:before {
+    background: inherit;
+    content: '';
+    height: 100%;
+    position: absolute;
+    transform: rotate(-60deg);
+    transform-origin: 50% 50%;
+    width: 100%;
+}
+
+.hex-puntiagudo2:after {
+    background: inherit;
+    content: '';
+    height: 100%;
+    position: absolute;
+    transform: rotate(60deg);
+    transform-origin: 50% 50%;
+    width: 100%;
+}
+
+.hex-puntiagudo2:hover {
+    background-color: rgb(119, 207, 220);
 }

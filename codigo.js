@@ -1,8 +1,13 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    let hexagon = document.querySelector('.hex-puntiagudo');
+    let hexagon = document.querySelector('.hex-puntiagudo2');
     let keysPressed = new Set();
     let velocidad = 3;
     let moving = false;
+    let angulo = 0;
+
+    var btnZoomIn = document.querySelector("#Zoom-in");
+    var btnZoomOut = document.querySelector("#Zoom-out");
+    var scale = 1;
 
     // Funciones que se ejecutan al cargar
     window.addEventListener('load', () => {
@@ -31,39 +36,44 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let left = parseInt(style.left);
         let top = parseInt(style.top);
 
-        if (keysPressed.has('ArrowUp')) {
+        if (keysPressed.has('ArrowUp') || keysPressed.has('W') || keysPressed.has('w')) {
             top -= velocidad;
         }
-        if (keysPressed.has('ArrowDown')) {
+        if (keysPressed.has('ArrowDown') || keysPressed.has('S') || keysPressed.has('s')) {
             top += velocidad;
         }
 
-        if (keysPressed.has('ArrowLeft')) {
+        if (keysPressed.has('ArrowLeft') || keysPressed.has('A') || keysPressed.has('a')) {
             left -= velocidad;
         }
-        if (keysPressed.has('ArrowRight')) {
+        if (keysPressed.has('ArrowRight') || keysPressed.has('D') || keysPressed.has('d')) {
             left += velocidad;
         }
 
         hexagon.style.left = `${left}px`;
         hexagon.style.top = `${top}px`;
 
+        if (keysPressed.has('Q') || keysPressed.has('q')) {
+            angulo -= 1;
+        }
+
+        if (keysPressed.has('E') || keysPressed.has('e')) {
+            angulo += 1;
+        }
+
+        hexagon.style.transform = 'rotate(' + angulo + 'deg) scale(' + scale + ')';
+
         requestAnimationFrame(move);
     }
 
-    // Funciones para hacer zoom-in y zoom-out
-    var btnZoomIn = document.querySelector("#Zoom-in");
-    var btnZoomOut = document.querySelector("#Zoom-out");
-    var scale = 1;
-
     btnZoomIn.addEventListener("click", (e) => {
         scale += 0.5;
-        hexagon.style.transform = `scale(${scale})`;
+        hexagon.style.transform = 'rotate(' + angulo + 'deg) scale(' + scale + ')';
     });
 
     btnZoomOut.addEventListener("click", (e) => {
         scale -= 0.5;
-        hexagon.style.transform = `scale(${scale})`;
+        hexagon.style.transform = 'rotate(' + angulo + 'deg) scale(' + scale + ')';
     });
 
     // Eventos de tecla presionada y tecla soltada
