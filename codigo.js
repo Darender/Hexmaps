@@ -1,13 +1,17 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    let hexagon = document.querySelector('.hex-puntiagudo2');
+    let hexagon = document.querySelector('.hexagono');
+    // Guarda la tecla presionada
     let keysPressed = new Set();
+
+    // Valores que guardan la velocidad, la escala y el angulo
     let velocidad = 3;
-    let moving = false;
+    var scale = 1;
     let angulo = 0;
+
+    let moving = false;
 
     var btnZoomIn = document.querySelector("#Zoom-in");
     var btnZoomOut = document.querySelector("#Zoom-out");
-    var scale = 1;
 
     // Funciones que se ejecutan al cargar
     window.addEventListener('load', () => {
@@ -17,7 +21,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
         hexagon.style.top = `${offsetY}px`;
     });
 
-    // Funciones para el movimiento 
+    // Funcione que se activa al hacer click al objetvo
+    let cambiado = false;
+    hexagon.addEventListener('click', function() {
+        if(!cambiado) {
+            hexagon.style.backgroundColor = 'blue';
+            cambiado = true;
+        } else {
+            hexagon.style.backgroundColor = 'rgb(131, 159, 164)';
+            
+            cambiado = false;
+        }
+    });
+
+    // Funciones para el movimiento, rotacion y escalado
     function startMoving() {
         moving = true;
         requestAnimationFrame(move);
@@ -61,11 +78,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
             angulo += 1;
         }
 
+        if (keysPressed.has('+')) {
+            scale += 0.05;
+        }
+
+        if (keysPressed.has('-')) {
+            scale -= 0.05;
+        }
+
+        if (scale < 0.05) {
+            scale = 0.05;
+        }
+
         hexagon.style.transform = 'rotate(' + angulo + 'deg) scale(' + scale + ')';
 
         requestAnimationFrame(move);
     }
 
+    //Funciones acticvadas al hacer click en los botones
     btnZoomIn.addEventListener("click", (e) => {
         scale += 0.5;
         hexagon.style.transform = 'rotate(' + angulo + 'deg) scale(' + scale + ')';

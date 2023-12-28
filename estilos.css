@@ -20,14 +20,14 @@ aside {
     height: 100%;
 }
 
-.hex-puntiagudo2 {
+.hexagono {
     height: 2.887em;
     position: absolute;
     width: 5em;
     background-color: rgb(131, 159, 164);
 }
 
-.hex-puntiagudo2:before {
+.hexagono:before {
     background: inherit;
     content: '';
     height: 100%;
@@ -37,7 +37,7 @@ aside {
     width: 100%;
 }
 
-.hex-puntiagudo2:after {
+.hexagono:after {
     background: inherit;
     content: '';
     height: 100%;
@@ -47,6 +47,6 @@ aside {
     width: 100%;
 }
 
-.hex-puntiagudo2:hover {
+.hexagono:hover {
     background-color: rgb(119, 207, 220);
 }
